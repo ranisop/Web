@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+   
+    <title>Document</title>
+</head>
+<body>
+    <!-- 주석 : 커맨드+/ -->
+    <!-- 1. Layout 시멘틱 태그 -->
+    <header id='header'>header</header>
+    <nav>nav</nav>
+    <aside>aside</aside>
+    <section>section</section>
+    <article>article</article>
+    <footer>footer</footer>
+
+    <!-- 2. Layout non 시멘틱 태그 -->
+    <div>div</div>
+
+    <!-- 3. 제목 -->
+    <h1>h1 태그</h1>
+    <h2>h2 태그</h2>
+    <h3>h3 태그</h3>
+    <h4>h4 태그</h4>
+    <h5>h5 태그</h5>
+    <h6>h6 태그</h6>
+
+    <!-- 4. 본문 -->
+    <p>본문입니다.</p> <!-- 위아래로 간격을 두고 문단을 만들어 줌 -->
+    <p>본문입니다.<br>본문입니다.</p> <!-- br은 줄만 바꾸고 위아래 간격은 없음 -->
+    <p>본
+        문
+        입
+        니
+        다.</p> <!-- 줄을 바꾸면 띄어쓰기만 됨 -->
+    <p>본문입니다.</p>
+
+    <!-- 5. 글자 꾸미기 -->
+    <b>굵은 글씨(특정한 역할을 가지지 않는 non 시멘틱 태그)</b> <!-- 레이아웃을 잡는게 아니고, 꾸미기만 해서 자동으로 줄바꿈이 안된당 -->
+    <strong>굵은 글씨(역할을 가지는 태그)</strong> <!-- 브라우저에서 보여지는 내용은 b와 strong이 같지만, 역할을 가지는 태그인지 아닌지 차이....??-->
+    <i>기울인 글씨</i>
+    <em>기울인 글씨</em> <!-- 요즘 추세는 역할을 가지는 태그를 좀 더 선호.....-->
+    <del>취소선</del>
+
+    <!-- 6. 리스트 -->
+    <!-- 순서가 있는 리스트(1,2,3...) -->
+    <ol>
+        <li>첫번째</li>
+        <li>두번째</li>
+        <li>세번째</li>
+    </ol>
+
+    <!-- 순서가 없는 리스트(도형으로 표시) -->
+    <ul>
+        <li>첫번째</li>
+        <li>두번째</li>
+        <li>세번째</li>
+    </ul>
+
+    <!-- 7. 링크 태그 -->
+    <!-- 절대 경로 -->
+    <a href="https://google.com">구글로 가자</a> <!-- '구글로 가자'를 누르면 해당 링크로 이동 -->
+    <!-- 상대 경로 -->
+    <a href="bye.html">바이로 가자</a>
+    <!-- id : 지정한 위치로 이동 -->
+    <a href="#header">헤더로 가자</a>  <!-- #header : id가 header인 곳으로 이동하기 -->
+    <!-- 메일 주소로 메일 보내기 -->
+    <a href="mailto:dizyobu65@naver.com">메일 보내기</a>
+    <br><br><br>
+
+    <!-- 8. 이미지 -->
+    <img src="cat.png" alt="cat" width='500px'> <!-- 이미지의 주소는 절대경로 or 상대경로 지정 가능 -->
+    <br>
+    <img src="https://www.aspcapro.org/sites/default/files/styles/image_component/public/topic/hero/mfn-kittens-in-kennel-hero_0.jpg?itok=5yK3ceIW" alt='cat2' width="500px">
+    <br><br><br>
+
+    <!-- 9. 비디오 -->
+    <video src=""></video>
+    <br>
+    <!-- 유투브 -> 공유 -> 퍼가기 누르면 iframe 코드가 있어서 그대로 복사해오면 됨 -->
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/7na_-LfGfpE" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <br><br><br>
+
+    <!-- 10. 입력창 -->
+    <input type="text">
+    <input type="password"> <!-- 입력하는 내용이 안보임, 복사안됨 -->
+    <input type="number"> <!-- 숫자만 들어가는데, 요즘은 잘 안쓰고 대체로 텍스트로 입력 받음 -->
+    <br>
+    <input type="radio" name="hello"> <!-- 동그란 클릭하는 버튼, name을 입력해줘야 함 -->
+    <input type="radio" name="hello">
+    <input type="radio" name="hello">
+    <input type="submit">  <!-- 제출버튼 생성 -->
+    <br><br><br>
+
+
+
+
+
+
+</body>
+</html>
