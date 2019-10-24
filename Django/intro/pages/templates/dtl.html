@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h3>1. 반복문</h3>
+    {% for food in foods %}  <!-- 반복문 사용할 때 -->
+        <li>{{ food }}</li>  <!-- li태그 : 동그라미 리스트 -->
+    {% endfor %}  <!-- 반복문 닫기 -->
+    
+    <!-- forloop -->
+    {% for food in foods %}  
+        <p>{{ forloop.counter }} {{ food }}</p> 
+    {% endfor %}  
+
+    <!-- empty list -->
+    {% for food in foods %} 
+        <p>{{ user }}</p>
+    {% empty %} 
+        <p>비어있는 리스트입니다.</p>
+    {% endfor %}
+
+
+    <h3>2. 조건문</h3>
+    {% if '짜장면' in foods %}
+        <p>짜장면에는 고춧가루지</p>
+    {% endif %}
+
+    <!-- 반복과 조건 -->
+    {% for food in foods %}
+        <p>{{ forloop.counter }}번째 도는 중..</p>
+        {% if forloop.first %}
+            <p>짜장면에는 고춧가루지!! </p>
+        {% else %}
+            <p>{{ food }}</p>
+        {% endif %}
+    {% endfor%}
+
+
+    <h3>3. filter 활용</h3>
+    <!-- 1. length filter -->
+    <!-- variable|filter -->
+    <p>(1) length filter</p>
+    {{ my_sentence|length }}  <!-- 문장의 길이 -->
+
+    {% for message in messages %}
+        {% if message|length > 5 %}
+            <p>{{ message }} 메시지가 너무 길어요</p>
+        {% else %}
+            <p>{{ message }}, {{ message|length}}</p>
+        {% endif %}
+    {% endfor %}
+
+    <!-- 2. lower -->
+    <p>(2) lower</p>
+    <p>{{ 'ABC'|lower }}</p>
+
+    <!-- 3. title -->
+    <p>(3) title</p>
+    <p>{{ my_sentence|title }}</p>
+
+    <!-- 4. random -->
+    <p>(4) random</p>
+    <p>{{ foods|random }}</p>
+
+    <!-- 5. truncate(글자수 제한) -->
+    <p>(5) truncate</p>
+    <p>{{ my_sentence|truncatewords:3 }}</p> <!-- 3개가 넘어가면 ...으로 표시 -->
+    <p>{{ my_sentence|truncatechars:3 }}</p> 
+    <p>{{ my_sentence|truncatechars:10 }}</p> 
+
+    <!-- 6. 연산 -->
+    <p>(6) 연산</p>
+    <p>{{ 4|add:6 }}</p>
+
+    <!-- 7. url -->
+    <p>(7) url</p>
+    <a href="https://google.com">Google</a>
+    {{ 'naver.com'|urlize }}
+
+
+    <h3>4. 날짜 표현</h3>
+    <!-- 단순 현재 시각 -->
+    <p>datetimenow : {{ datetimenow }}</p>
+    <p>DATETIME_FORMAT : {% now 'DATETIME_FORMAT' %}</p>
+    <p>SHORT_DATETIME_FORMAT : {% now 'SHORT_DATETIME_FORMAT' %}</p>
+    <p>DATE_FORMAT : {% now 'DATE_FORMAT' %}</p>
+    <p>SHORT_DATE_FORMAT : {% now 'SHORT_DATE_FORMAT' %}</p>
+
+    <!-- 포맷 커스텀 -->
+    <!-- strftime(https://www.ibm.com/support/knowledgecenter/ko/ssw_ibm_i_73/rtref/strfti.htm)-->
+    <p>{% now 'Y년 m월 d일 (D) h:i' %}</p>
+    <p>{% now 'Y' %}</p>
+    <p>{% now 'Y' as current_year %}</p> <!-- 연도를 current_year 변수에 넣을 수 있음 -->
+    <h4>Copyright {{ current_year }}</h4>
+
+    <!-- date filter -->
+    <p>{{ datetimenow|date:'SHORT_DATETIME_FORMAT' }}</p>
+
+    <h3>5. lorem</h3>
+    <p>{% lorem %}</p>
+    <p>{% lorem 3 w random %}</p>
+    <p>{% lorem 3 p %}</p>
+
+</body>
+</html>
