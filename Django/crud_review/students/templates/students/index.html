@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<h1>Student Index</h1>
+
+<!-- <a href="/students/new/">New</a> -->
+<a href="{% url 'students:new' %}">New</a>
+<ul>
+    {% for student in students %}
+        <li>
+            <!-- <a href="/students/{{ student.pk }}/">{{ student.name }}</a> -->
+            <a href="{% url 'students:detail' student.pk %}">{{ student.name }}</a>
+            <!-- url 함수의 첫번째 파라미터가 detail, 두번째가 student.pk -->
+            
+        </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}
