@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
+    path('accounts/', include('accounts.urls')),  # accounts에서의 요청은 지금 이 urls.py가 아니라 accounts 안의 urls.py로 보내라
     path('articles/', include('articles.urls')),
     path('admin/', admin.site.urls),
 ]
