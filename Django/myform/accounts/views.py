@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm  # 유저생성(회원가입)폼, 인증(로그인할때)폼, 유저변경폼
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm, UserChangeForm, PasswordChangeForm  # 유저생성(회원가입)폼, 인증(로그인할때)폼, 유저변경폼, 비밀번호변경폼
 from django.contrib.auth import login as auth_login
 from django.contrib.auth import logout as auth_logout
 from .forms import CustomUserChangeForm
+from django.contrib.auth import update_session_auth_hash
+
 
 # Create your views here.
 def signup(request):
@@ -45,7 +47,9 @@ def login(request):
             # 3. 로그인 수행
             auth_login(request, form.get_user())  # form.get_user() : 메소드, 검증을 통과한 유저의 정보가 담겨있음.
             # 4. redirect => 메인 페이지 (articles index)
-            return redirect('articles:index')
+            # 4-1. 주소창에 next값이 있으면 next로 redirect하고, 없으면 articles:index로 redirect하라.
+            next = request.GET.get('next') # 주소창에 있는 값은 POST가 아니라 GET으로 받아야 함
+            return redirect(next or 'articles:index')
     else:
         # 로그인 창 보여줌
         form = AuthenticationForm()
@@ -89,6 +93,32 @@ def delete(request):
         # user 삭제
         request.user.delete()
         return redirect('articles:index')
+
+
+def password(request):
+    if request.method == 'POST':
+        # 실제로 비밀번호 변경
+        # 1. 넘어온 데이터 Form에 입력
+        form = PasswordChangeForm(request.user, request.POST)  # POST로 넘어온 바꾸고자 하는 비밀번호의 데이터를 원래 유저의 정보에다가 넣어주기
+        # 2. 검증
+        if form.is_valid():
+            # 3. 비밀번호 저장
+            user = form.save()  # 새 비밀번호가 저장되면 세션이 만료가 되면서 다 로그아웃됨
+            # 3-1. 세션 유지(지금 비밀번호 바꾼 브라우져는 user이기 때문에 그 창은 로그아웃이 되지 않도록 세션 유지하기)
+            update_session_auth_hash(request, user)
+            # 4. redirect -> 메인 페이지
+            return redirect('articles:index')
+    else:
+        # 비밀번호를 변경하는 양식 보여줌
+        form = PasswordChangeForm(request.user)  # 어떤 유저의 비밀번호를 변경할건지 알아야하기 때문에 꼭 유저 정보가 담긴 파라미터를 넣어줘야함
+    
+    context = {
+        'form' : form,
+    }
+    return render(request, 'accounts/password.html', context)
+
+
+
 
 
 
