@@ -15,9 +15,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.shortcuts import redirect
+
+# def root(request):
+#     return redirect('articles:index')
 
 urlpatterns = [
     path('accounts/', include('accounts.urls')),  # accounts에서의 요청은 지금 이 urls.py가 아니라 accounts 안의 urls.py로 보내라
     path('articles/', include('articles.urls')),
     path('admin/', admin.site.urls),
+    path('', lambda r: redirect('articles:index'), name='root'),  # 메인페이지에 어떤게 올지 정의할 수 있음
 ]
+
